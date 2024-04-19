@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/defaultLayout}">
+<main layout:fragment="content">
+
+        <div id="sub">
+            <div><img th:src="@{/images/sub_top_tit4.png}" alt="CROP TALK"></div>
+            <section class="event">
+                <aside>
+                    <img th:src="@{/images/sub_aside_cate4_tit.png}" alt="이벤트"/>
+
+                    <ul class="lnb">
+                        <li class="on"><a th:href="@{/event/event}">이벤트</a></li>
+                    </ul>
+
+                </aside>
+                <article>
+                    <nav>
+                        <img th:src="@{/images/sub_nav_tit_cate4_tit1.png}" alt="이벤트"/>
+                        <p>
+                            HOME > 이벤트 > <em>이벤트</em>
+                        </p>
+                    </nav>
+
+                    <!-- 내용 시작 -->
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>제목</th>
+                            <th>글쓴이</th>
+                            <th>날짜</th>
+                            <th>조회</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- 서버에서 받아온 게시글 목록을 Thymeleaf의 반복문을 이용하여 동적으로 추가 -->
+                        <tr th:each="post : ${posts}">
+                            <td th:text="${post.no}"></td>
+                            <td th:text="${post.title}"></td>
+                            <td th:text="${post.writer}"></td>
+                            <td th:text="${post.rdate}"></td>
+                            <td th:text="${post.hit}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- 검색 폼 -->
+                    <form id="searchForm" action="/event/search" method="post">
+                        <!-- 검색 옵션 선택 -->
+                        <select id="searchOption" name="searchOption">
+                            <option value="title">제목</option>
+                            <option value="content">내용</option>
+                            <option value="titleAndContent">제목+내용</option>
+                        </select>
+
+                        <!-- 검색어 입력 -->
+                        <input type="text" id="searchInput" name="searchInput" placeholder="검색어를 입력하세요">
+
+                        <!-- AND와 OR 선택 -->
+                        <label><input type="radio" name="searchType" value="and">AND</label>
+                        <label><input type="radio" name="searchType" value="or">OR</label>
+
+                        <!-- 검색 버튼 -->
+                        <button type="submit">검색</button>
+                    </form>
+                    <!-- 내용 끝 -->
+                </article>
+            </section>
+
+        </div>
+</main>
+</html>
