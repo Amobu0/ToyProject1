@@ -1,17 +1,3 @@
-logging:
-    file:
-        name: logs/farmstory.log
-    level:
-        jdbc:
-            connection: info
-            resultsettable: info
-            sqlonly: info
-            sqltiming: info
-        root: info
-
-mybatis:
-    mapper-locations: classpath:mappers/**/*.xml
-
 server:
     port: 8080
     servlet:
@@ -20,29 +6,18 @@ server:
 spring:
     application:
         name: farmstory
+
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         password: 1234
         url: jdbc:mysql://127.0.0.1:3306/farmstory
         username: Amobu0
+
     devtools:
         livereload:
             enabled: true
         restart:
             enabled: false
-
-    mail:
-        host: smtp.gmail.com
-        port: 587
-        username: gudals9677@gmail.com
-        password: jcnyrsutnhetmocx
-        properties:
-            mail:
-                smtp:
-                    auth: true
-                    timeout: 5000
-                    starttls:
-                        enable: true
 
     jpa:
         database: mysql
@@ -54,54 +29,35 @@ spring:
             hibernate:
                 format_sql: true
                 show_sql: true
+    mail:
+        host: smtp.gmail.com
+        password: jcnyrsutnhetmocx
+        port: 587
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+                    timeout: 5000
+        username: gudals9677@gmail.com
+
+
+    output:
+        ansi:
+            enabled: always
+
 
     servlet:
         multipart:
             location: uploads/
             max-file-size: 10MB
 
+
     thymeleaf:
         prefix: classpath:/templates
 
 
-
-#    security:
-#        oauth2:
-#            client:
-#                provider:
-#                    kakao:
-#                        authorization-uri: https://kauth.kakao.com/oauth/authorize
-#                        user-name-attribute: id
-#                        token-uri: https://kauth.kakao.com/oauth/token
-#                        user-info-uri: https://kapi.kakao.com/v2/user/me
-#                    google:
-#                        authorization-uri: https://accounts.google.com/o/oauth2/v2/auth?prompt=consent
-#
-#                registration:
-#                    kakao:
-#                        client-name: kakao
-#                        authorization-grant-type: authorization_code
-#
-#                        # 카카오 > 내 애플리케이션 > 카카오 로그인 > 등록한 Redirect URI 입력
-#                        redirect-uri: http://localhost:8080/sboard/login/oauth2/code/kakao
-#
-#                        # 카카오 > 내 애플리케이션 > 요약정보 > REST API 키 입력
-#                        client-id: 8c15da6264d59342395c9fdb2fe01adc
-#
-#                        # 카카오 > 내 애플리케이션 > 카카오 로그인 > 보안 > Client Secret 생성 후 입력
-#                        client-secret: 3pdo9RQtMPQ2RFMGJu5l8v2F87D9Ex53
-#
-#                        client-authentication-method: client_secret_post
-#                        scope:
-#                            - profile_nickname
-#                            - profile_image
-#                    google:
-#                        client-id: 68738381961-sod8c6j6ltj98lm8l0palqssd1eq68n9.apps.googleusercontent.com
-#                        client-secret: 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
-#                        redirect-uri: http://localhost:8080/sboard/login/oauth2/code/google
-#                        scope:
-#                            - email
-#                            - profile
 
 file:
     upload:
@@ -109,4 +65,20 @@ file:
 
 images:
     upload:
-         path: imageuploads/
+        path: imageuploads/
+
+logging:
+    file:
+        name: logs/farmstory.log
+    level:
+        jdbc:
+            connection: info
+            resultsettable: info
+            sqlonly: info
+            sqltiming: info
+        root: info
+
+
+mybatis:
+    mapper-locations: classpath:mappers/**/*.xml
+
