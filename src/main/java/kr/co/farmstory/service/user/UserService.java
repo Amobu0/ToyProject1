@@ -6,11 +6,14 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import kr.co.farmstory.dto.TermsDTO;
 import kr.co.farmstory.dto.UserDTO;
+import kr.co.farmstory.entity.User;
 import kr.co.farmstory.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,6 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class UserService {
 
     private final UserMapper userMapper;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
     // JavaMailSender 주입
     private final JavaMailSender javaMailSender;
@@ -34,7 +38,10 @@ public class UserService {
     }
 
     public void insertUser(UserDTO userDTO) {
-
+        log.info("userDTO.getPass()={}", userDTO.getPass());
+        userDTO.setPass(bCryptPasswordEncoder.encode(userDTO.getPass()));
+        log.info("userDTO.getPass()={}", userDTO.getPass());
+        userDTO.setRole("ROEL_USER");
 
         userMapper.insertUser(userDTO);
     }

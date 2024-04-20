@@ -26,11 +26,12 @@
         name=#{name},
         nick=#{nick},
         email=#{email},
+        role=#{role},
         hp=#{hp},
         zip=#{zip},
         addr1=#{addr1},
         addr2=#{addr2},
-        regip=#{regip},
+        regIp=#{regIp},
         regDate=NOW()
     </insert>
 

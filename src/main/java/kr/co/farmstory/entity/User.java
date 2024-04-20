@@ -1,8 +1,6 @@
 package kr.co.farmstory.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -28,7 +26,7 @@ public class User {
     private String zip;
     private String addr1;
     private String addr2;
-    private String regip;
+    private String regIp;
     private String sms;
     private String provider;
 
@@ -36,5 +34,5 @@ public class User {
     private LocalDateTime regDate;
     private LocalDateTime leaveDate;
 
-    private int point;
+    private Integer point;
 }

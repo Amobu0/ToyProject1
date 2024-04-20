@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @Slf4j
-@RequestMapping("user")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -27,6 +27,7 @@ public class UserController {
     public String loginFrom() {
         return "/user/login";
     }
+
 
     @GetMapping("/terms")
     public String terms(Model model){
@@ -44,8 +45,7 @@ public class UserController {
     @PostMapping("/register")
     public String register(HttpServletRequest req, UserDTO userDTO){
 
-        String regip = req.getRemoteAddr();
-        userDTO.setRegIp(regip);
+        userDTO.setRegIp(req.getRemoteAddr());
 
         log.info(userDTO.toString());
 

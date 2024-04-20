@@ -9,9 +9,9 @@ spring:
 
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        password: 1234
         url: jdbc:mysql://127.0.0.1:3306/farmstory
         username: Amobu0
+        password: 1234
 
     devtools:
         livereload:
@@ -21,8 +21,37 @@ spring:
 
     jpa:
         database: mysql
+
+
+
+#        update 설정시 특정한 Entity 기반으로 DB에 Table 생성
+#        Table 생성후 none으로 바꿔서 데이터가 덮어씌워지는 불상사를 방지
+#        DDL(Data Definition Language) 자동으로 작성해주는 편리한 기능이지만
+#        잘못 다루면 돌이킬 수 없는 결과를 가져오는 위험한 기능
+
+#        create : 해당 엔티티(Entity)랑 매핑되는 테이블이 존재하면 기존 테이블 삭제(drop)하고 테이블 생성
+
+#        update : 엔티티(Entity)로 등록된 클래스(Class)와 매핑되는 테이블이 없으면 테이블을 생성
+#                 기존 테이블이 존재하면 테이블의 컬럼을 변경한다.
+#                 기존에 존재하는 컬럼의 속성(nullable, 크기, 데이터타입 등)은 건드리지 않고,
+#                 새로운 컬럼이 추가되는 변경사항만 반영한다.
+#        (ex) 엔티티(Entity) User Class 안의 private String uid-> private Int uid 변경 안 됨
+
+#        validate : 엔티티(Entity)로 등록된 클래스(Class)와 매핑되는 테이블이 정상적으로 매핑되는지만 검사
+#                   만약 존재하지 않거나 매핑되는 엔티티 클래스에 칼럼이 존재하지 않으면 예외를 발생시키면서 애플리케이션 종료
+#                   엔티티 클래스에 필드가 테이블에 모두 존재하지만 한다면, 테이블의 컬럼이 더 많더라도 아무 일도 일어나지 않는다.
+
+#        none(default) : 아무 일도 일어나지 않는다.
+
+
+#       개발 초기 및 로컬에서 테스트 : create, update
+#       테스트 서버 : update, validate
+#       스테이징 및 운영 서버 : validate, none
+#
         hibernate:
-            ddl-auto: update
+            ddl-auto: create
+
+
             naming:
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         properties:
