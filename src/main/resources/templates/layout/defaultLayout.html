@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>팜스토리</title>
@@ -30,12 +31,17 @@
 <div id="container">
     <header>
         <a th:href="@{/index}" class="logo"><img th:src="@{/images/logo.png}" alt="로고"/></a>
-        <p>
-            <a th:href="@{/index}">HOME |</a>
-            <a th:href="@{/user/login}">로그인 |</a>
-            <a th:href="@{/user/register}">회원가입 |</a>
-            <a th:href="@{/admin}">관리자 |</a>
-        </p>
+        <div class="userBox">
+            <a th:href="@{/introduction/service}">고객센터</a>
+            <a sec:authorize="isAnonymous()" th:href="@{/user/register}">회원가입 </a>
+            <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+            <a class="nav-link" sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin/index}">관리자</a>
+            <th:block>
+                <span sec:authorize="isAuthenticated()">[[${uid}]]</span>
+                <span sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">[[${role}]]</span>
+            </th:block>
+        </div>
         <img th:src="@{/images/head_txt_img.png}" alt="3만원 이상 무료배송"/>
 
         <ul class="gnb">

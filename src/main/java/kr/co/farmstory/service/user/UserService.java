@@ -41,7 +41,7 @@ public class UserService {
         log.info("userDTO.getPass()={}", userDTO.getPass());
         userDTO.setPass(bCryptPasswordEncoder.encode(userDTO.getPass()));
         log.info("userDTO.getPass()={}", userDTO.getPass());
-        userDTO.setRole("ROEL_USER");
+        userDTO.setRole("ADMIN");
 
         userMapper.insertUser(userDTO);
     }
